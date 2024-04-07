@@ -1,12 +1,4 @@
 # Toxic Comment Classification
-### Group Project for MSDS621 Machine Learning at University of San Francisco
-
-### Group Member
-Shivee Singh  
-Neha Tevathia  
-Mengting (Joyce) Chang  
-Xinran(Grace) Zhang  
-Tianqi Wang  
 
 ### Table of Content
 - Dataset Overview
@@ -14,12 +6,9 @@ Tianqi Wang
 - Model Fitting 
 - Results
 
-![alt text](https://github.com/tianqwang/MSDS621-Final-Project/blob/master/image/Power-In-Positivity.jpg?raw=true)
 
 ### Dataset Overview
 The threat of abuse and harassment online prevent many people from expressing themselves and make them give up on seeking different opinions. In the meantime, platforms struggle to effectively facilitate conversations, leading many communities to limit or completely shut down user comments. Therefore, Kaggle started this competition with the Conversation AI team, a research initiative founded by Jigsaw and Google. The competition could be found here: https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge
-
-As a group of students with great interests in Natural Language Processing, as well as making online discussion more productive and respectful, we determined to work on this project and aim to build a model that is capable of detecting different types of toxicity like threats, obsenity, insults, and identity-based hate. 
 
 The dataset we are using consists of comments from Wikipedia’s talk page edits. These comments have been labeled by human raters for toxic behavior. The types of toxicity are:
 - toxic
@@ -34,11 +23,6 @@ There are 159,571 observations in the training dataset and 153,164 observations 
 ### Data Preprocessing and EDA
 
 Since all of our data are text comments, we wrote our own `tokenize()` function, removing punctuations and special characters, stemming and/or lemmatizing the comments, and filtering out comments with length below 3. After benchmarking between different vectorizers (TFIDFVectorizer and CountVectorizer), we chose TFIDFVectorizer, which provides us with better performance.
-
-![alt text](https://user-images.githubusercontent.com/40482785/49547039-90079900-f896-11e8-8e99-f83e327757ac.png) ![alt text](https://github.com/tianqwang/MSDS621-Final-Project/blob/master/image/label_frequency.png?raw=true)
-
-The major concern of the data is that most of the comments are clean (i.e., non-toxic). There are only a few observations in the training data for Labels like `threat`. This indicates that we need to deal with imbalanced classes later on and indeed, we use different methods, such as resampling, choosing appropriate evaluation metrics, and choosing robust models to address this problem.
-
 
 
 ### Model Fitting
@@ -59,11 +43,6 @@ After checking how these models perform on the test data, we notice that Muninom
 
 Overall, without any hyperparameter tuning, LinearSVC performs the best initially.
 
-#### Pipeline with Manual Hyperparameter Tuning
-After accounting for the imbalanced data, the F1 score of Logistic Regression model has jumped to an average of 0.9479 while Linear SVC has jumped to 0.9515.
-
-![alt text](https://github.com/tianqwang/MSDS621-Final-Project/blob/master/image/Pipeline_comp.png?raw=true) 
-
 #### Grid Search
 
 With the help of grid search, we were able to find the "optimal" hyperparameters for the models and have reached an average of the best score of 0.9566 for Logistic Regression and 0.9585 for Linear SVC.
@@ -81,8 +60,4 @@ To ensemble different models, we firstly tried a few models based on tree boosti
 
 In terms of evaluation metric, Linear SVC performs the best. But we believe after tuning hyperparameters for ensembling, we will get better results. Besides, Linear SVC trains model the fastest. Refering to interpretability, Linear SVC is also easier for the users to understand and has a simpler internal processing.
 Therefore, we choose Linear SVC as our optimal model.
-
-### Top and Bottom Features
-![alt text](https://github.com/tianqwang/MSDS621-Final-Project/blob/master/image/topbottomwords.png?raw=true)
-
 
